@@ -17,7 +17,7 @@ class TweetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', 'number'],
+            'user_id' => ['required', 'integer'],
             'message' => ['required'],
         ];
     }

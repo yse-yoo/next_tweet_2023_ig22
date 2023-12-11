@@ -19,7 +19,7 @@ class TweetController extends Controller
     }
 
     //データ投稿
-    function add(Request $request) : String {
+    function add(TweetRequest $request) : String {
         //「tweets」テーブルにレコード追加
         // INSERT INTO tweets (user_id, message) VALUES (xxx, xxx);
         $tweet = Tweet::create($request->all());
