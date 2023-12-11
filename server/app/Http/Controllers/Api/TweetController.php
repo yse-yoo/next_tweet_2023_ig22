@@ -10,10 +10,20 @@ class TweetController extends Controller
 {
     //データ取得
     function get() : String {
-        //「tweets」テーブルのデータをすべて取得
+        //「tweets」テーブルのレコードをすべて取得
         // SELECT * FROM tweets;
         $tweets = Tweet::get();
         // JSONでレスポンス
         return response()->json($tweets);
     }
+
+    //データ投稿
+    function add(Request $request) : String {
+        //「tweets」テーブルにレコード追加
+        // INSERT INTO tweets (user_id, message) VALUES (xxx, xxx);
+        $tweet = Tweet::create($request->all());
+        // JSONでレスポンス
+        return response()->json($tweet);
+    }
+
 }
