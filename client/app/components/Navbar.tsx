@@ -5,7 +5,7 @@ const Navbar = () => {
     return (
         <nav>
             <div className='flex flex-wrap items-center mx-auto p-4'>
-                <Link href="/">
+                <Link href="/" className='p-3'>
                     <span className='self-center text-2xl font-semibold'>Next Tweet</span>
                 </Link>
 
