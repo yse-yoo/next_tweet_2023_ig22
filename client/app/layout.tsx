@@ -14,7 +14,9 @@ export default function RootLayout({
   // JSX
   return (
     <html lang="ja">
-      <body>{children}</body>
+      <body className='flex min-h-screen flex-col p-2'>
+        {children}
+      </body>
     </html>
   )
 }
