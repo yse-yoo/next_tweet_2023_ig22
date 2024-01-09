@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class TweetController extends Controller
 {
     //データ取得
-    function get() : String {
+    function get() {
         //「tweets」テーブルのレコードをすべて取得
         // SELECT * FROM tweets;
         $tweets = Tweet::get();
@@ -19,7 +19,7 @@ class TweetController extends Controller
     }
 
     //データ投稿
-    function add(TweetRequest $request) : String {
+    function add(TweetRequest $request) {
         //「tweets」テーブルにレコード追加
         // INSERT INTO tweets (user_id, message) VALUES (xxx, xxx);
         $tweet = Tweet::create($request->all());
