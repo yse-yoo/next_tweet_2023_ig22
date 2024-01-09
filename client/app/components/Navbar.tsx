@@ -4,8 +4,8 @@ const Navbar = () => {
     console.log("Navbar!!!!")
     return (
         <nav>
-            <div className='flex flex-wrap items-center mx-auto p-4'>
-                <Link href="/" className='p-3'>
+            <div className='flex flex-wrap items-center mx-auto py-4'>
+                <Link href="/" className='me-3'>
                     <span className='self-center text-2xl font-semibold'>Next Tweet</span>
                 </Link>
 
