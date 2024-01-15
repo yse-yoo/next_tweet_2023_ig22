@@ -5,9 +5,11 @@ interface NavbarLinkProps {
     label: string;
 }
 
+const className = "hidden p-3 md:inline-block text-black";
+
 const NavbarLink = ({href, label} : NavbarLinkProps) => {
     return (
-        <Link href={href} className='py-2 px-3'>{label}</Link>
+        <Link href={href} className={className}>{label}</Link>
     );
 }
 
