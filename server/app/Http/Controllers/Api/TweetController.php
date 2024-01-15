@@ -20,11 +20,14 @@ class TweetController extends Controller
 
     //データ投稿
     function add(TweetRequest $request) {
-        //「tweets」テーブルにレコード追加
-        // INSERT INTO tweets (user_id, message) VALUES (xxx, xxx);
-        $tweet = Tweet::create($request->all());
-        // JSONでレスポンス
-        return response()->json($tweet);
+        //現在、認証しているユーザ
+        $user = $request->user();
+        if ($user && $user->id == $request->user_id) {
+            $tweet = Tweet::create($request->all());
+            return response()->json($tweet);
+        } else {
+            return response()->json(['error' => 'anothor user post']);
+        }
     }
 
 }
