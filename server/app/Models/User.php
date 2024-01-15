@@ -44,7 +44,7 @@ class User extends Authenticatable
         if (Auth::attempt($credentials)) {
             $user = User::where('email', $request->email)->firstOrFail();
             // トークン作成して返す
-            return $user->createToken('auth_token')->plainTextToken;
+            return $user->createToken('auth_token', ['*'], now()->addWeek())->plainTextToken;
         }
         return "";
     }
