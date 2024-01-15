@@ -40,9 +40,10 @@ class User extends Authenticatable
     static function auth(Request $request): string
     {
         $credentials = $request->only('email', 'password');
+        //ユーザ認証
         if (Auth::attempt($credentials)) {
             $user = User::where('email', $request->email)->firstOrFail();
-            // トークン作成
+            // トークン作成して返す
             return $user->createToken('auth_token')->plainTextToken;
         }
         return "";
