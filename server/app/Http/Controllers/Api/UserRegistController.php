@@ -25,8 +25,7 @@ class RegistUserController extends Controller
         if ($user) {
             $user->remember_token = $user->createToken('auth_token', '[*]', now()->addWeek())->plainTextToken;;
             $user->save();
-            $user->access_token = $user->remember_token;
-            return response()->json(['user' => $user]);
+            return response()->json(['user' => $user, 'access_token' => $user->remember_token]);
         } else {
             return response()->json(['error' => ['message' => 'invalid regist']]);
         }
