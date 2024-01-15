@@ -18,13 +18,13 @@ const Navbar = () => {
                             <NavbarLink href="/user/profile" label="Profile" />
                         </li>
                         <li>
-                            <Link href="/regist" className='py-2 px-3'>Register</Link>
+                            <NavbarLink href="/auth/regist" label="Register" />
                         </li>
                         <li>
-                            <Link href="/login" className='py-2 px-3'>Sign in</Link>
+                            <NavbarLink href="/auth/login" label="Sign in" />
                         </li>
                         <li>
-                            <Link href="/user/logout" className='py-2 px-3'>Sign out</Link>
+                            <NavbarLink href="#" label="Sign out" />
                         </li>
                     </ul>
                 </div>
