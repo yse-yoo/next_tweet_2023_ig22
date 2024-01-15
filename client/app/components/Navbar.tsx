@@ -15,7 +15,7 @@ const Navbar = () => {
             <div className="text-sm md:flex-grow">
                 <NavbarLink href="/user/profile" label="Profile" />
                 <NavbarLink href="/auth/regist" label="Register" />
-                <NavbarLink href="#" label="Sign out" onClick={undefined} />
+                <button onClick={undefined}>Sign out</button>
                 <NavbarLink href="/auth/login" label="Sign in" />
             </div>
         </nav>
