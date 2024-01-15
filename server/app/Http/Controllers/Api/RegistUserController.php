@@ -18,7 +18,7 @@ class RegistUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
         if ($user) {
-            $user->remember_token = $user->createToken('auth_token', '[*]', now()->addWeek())->plainTextToken;;
+            $user->remember_token = $user->createToken('auth_token', ['*'], now()->addWeek())->plainTextToken;
             $user->save();
             $user->access_token = $user->remember_token;
             return response()->json(['user' => $user]);
