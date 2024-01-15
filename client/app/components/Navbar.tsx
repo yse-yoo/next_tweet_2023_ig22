@@ -3,24 +3,23 @@ import { SiLoopback } from 'react-icons/si';
 import NavbarLink from './NavbarLink';
 
 const Navbar = () => {
-    console.log("Navbar!!!!")
     return (
-        <nav>
-            <div className="flex flex-wrap items-center mx-auto py-4">
+        <nav className="px-5 py-3 flex border-b">
+            <div className="flex items-center mr-6">
                 <SiLoopback className="me-3" size="2em" />
-                <Link href="/" className='me-3 text-black'>
-                    <span className="text-2xl font-semibold">Next Tweet</span>
+                <Link href="/" className="text-black">
+                    <span className="font-semibold text-xl">Next Tweet</span>
                 </Link>
+            </div>
 
-                <div className='flex flex-wrap'>
-                    <NavbarLink href="/user/profile" label="Profile" />
-                    <NavbarLink href="/auth/regist" label="Register" />
-                    <NavbarLink href="/auth/login" label="Sign in" />
-                    <NavbarLink href="#" label="Sign out" onClick={undefined} />
-                </div>
+            <div className="text-sm md:flex-grow">
+                <NavbarLink href="/user/profile" label="Profile" />
+                <NavbarLink href="/auth/regist" label="Register" />
+                <NavbarLink href="#" label="Sign out" onClick={undefined} />
+                <NavbarLink href="/auth/login" label="Sign in" />
             </div>
         </nav>
-    );
+    )
 }
 
 export default Navbar;
