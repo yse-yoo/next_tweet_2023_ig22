@@ -8,10 +8,9 @@ use Illuminate\Support\Facades\Route;
 
 //ルーティングのURL：「/api/xxxx」
 // TweetController
-Route::get('tweet/get', [TweetController::class, 'get']);
-
 // Token認証しているユーザのみ実行
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('tweet/get', [TweetController::class, 'get']);
     Route::post('tweet/add', [TweetController::class, 'add']);
 });
 
