@@ -1,3 +1,5 @@
+"use client"
+
 import Link from 'next/link'
 import { SiLoopback } from 'react-icons/si';
 import NavbarLink from './NavbarLink';
@@ -15,7 +17,7 @@ const Navbar = () => {
             <div className="text-sm md:flex-grow">
                 <NavbarLink href="/user/profile" label="Profile" />
                 <NavbarLink href="/auth/regist" label="Register" />
-                <button onClick={undefined}>Sign out</button>
+                <NavbarLink href="#" label="Sign out" onClick={() => {alert('Ok')}} />
                 <NavbarLink href="/auth/login" label="Sign in" />
             </div>
         </nav>

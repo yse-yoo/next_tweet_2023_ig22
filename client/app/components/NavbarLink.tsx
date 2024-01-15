@@ -3,7 +3,7 @@ import Link from 'next/link'
 interface NavbarLinkProps {
     href: string;
     label: string;
-    onClick?: any;
+    onClick?: () => void;
 }
 
 const className = "hidden mt-1 p-3 md:inline-block text-black";
