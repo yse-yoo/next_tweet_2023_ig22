@@ -15,7 +15,7 @@ const Navbar = () => {
                 <div>
                     <ul className='flex flex-wrap'>
                         <li>
-                            <NavbarLink />
+                            <NavbarLink href="/user/profile" label="Profile" />
                         </li>
                         <li>
                             <Link href="/regist" className='py-2 px-3'>Register</Link>

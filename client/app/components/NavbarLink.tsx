@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
-const NavbarLink = () => {
+const NavbarLink = ({href, label}) => {
     return (
-        <Link href="/user/profile" className='py-2 px-3'>Profile</Link>
+        <Link href={href} className='py-2 px-3'>{label}</Link>
     );
 }
 
