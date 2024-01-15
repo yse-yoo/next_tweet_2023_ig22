@@ -1,6 +1,11 @@
 import Link from 'next/link'
 
-const NavbarLink = ({href, label}) => {
+interface NavbarLinkProps {
+    href: string;
+    label: string;
+}
+
+const NavbarLink = ({href, label} : NavbarLinkProps) => {
     return (
         <Link href={href} className='py-2 px-3'>{label}</Link>
     );
