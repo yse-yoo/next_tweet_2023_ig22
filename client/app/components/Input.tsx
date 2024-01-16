@@ -10,7 +10,7 @@ const Input = ({type, value, onChange, placeholder} : InputProps) => {
     return (
         <input type={type}
             value={value}
-            onChange={(e) => {onChange(e.target.value)}}
+            onChange={(e) => { onChange && onChange(e.target.value)}}
             placeholder={placeholder}
             className="my-2 border-2 
                 border-gray-200

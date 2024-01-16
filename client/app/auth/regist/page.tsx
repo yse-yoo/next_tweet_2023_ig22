@@ -7,9 +7,11 @@ import Input from "@/app/components/Input";
 
 const RegistPage = () => {
     const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const regist = async () => {
-        console.log(name)
+        console.log(name, email, password)
     }
 
     return (
@@ -20,9 +22,21 @@ const RegistPage = () => {
             </h1>
 
             <div>
-                <Input type="text" placeholder="Your Name" onChange={setName} />
-                <Input type="text" placeholder="Email" />
-                <Input type="password" placeholder="******" />
+                <Input
+                    type="text"
+                    onChange={setName}
+                    placeholder="Your Name"
+                />
+                <Input
+                    type="text"
+                    onChange={setEmail}
+                    placeholder="Email"
+                />
+                <Input
+                    type="password"
+                    onChange={setPassword}
+                    placeholder="******"
+                />
             </div>
 
             <div>
