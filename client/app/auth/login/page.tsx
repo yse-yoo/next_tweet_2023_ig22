@@ -1,3 +1,5 @@
+"user client"
+
 import Link from "next/link";
 import Input from "@/app/components/Input";
 import { RiLockPasswordFill } from "react-icons/ri";
