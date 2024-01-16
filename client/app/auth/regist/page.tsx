@@ -1,3 +1,5 @@
+"use client"
+
 import { FaUser } from "react-icons/fa";
 
 const RegistPage = () => {
@@ -7,6 +9,20 @@ const RegistPage = () => {
                 <FaUser className="mt-1 me-3" />
                 Sign up
             </h1>
+
+            <div>
+                <input type="text" 
+                className="
+                    my-2 border-2 
+                    border-gray-200
+                    rounded
+                    w-full
+                    p-3
+                    focus:outline-none
+                    focus:bg-white
+                    focus:border-blue-500
+                "/>
+            </div>
         </div>
     );
 }
