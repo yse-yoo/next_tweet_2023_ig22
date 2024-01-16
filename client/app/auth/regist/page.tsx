@@ -9,7 +9,6 @@ const RegistPage = () => {
     const [name, setName] = useState("");
 
     const regist = async () => {
-        alert(name)
         console.log(name)
     }
 
