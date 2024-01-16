@@ -13,6 +13,8 @@ const RegistPage = () => {
 
             <div>
                 <Input />
+                <Input />
+                <Input />
             </div>
         </div>
     );
