@@ -8,6 +8,11 @@ import Input from "@/app/components/Input";
 const RegistPage = () => {
     const [name, setName] = useState("");
 
+    const regist = async () => {
+        alert(name)
+        console.log(name)
+    }
+
     return (
         <div className="mx-auto w-1/3">
             <h1 className="my-2 p-1 flex justify-center text-2xl font-bold">
@@ -23,7 +28,7 @@ const RegistPage = () => {
 
             <div>
                 <button
-                    onClick={() => { alert('Sign up') }}
+                    onClick={regist}
                     className="
                             w-full
                           bg-blue-500 hover:bg-blue-700
