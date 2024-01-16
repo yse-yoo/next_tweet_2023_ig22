@@ -5,9 +5,9 @@ import Input from "@/app/components/Input";
 
 const RegistPage = () => {
     return (
-        <div>
-            <h1 className="p-3 flex justify-center text-3xl font-bold">
-                <FaUser className="mt-1 me-3" />
+        <div className="mx-auto w-1/3">
+            <h1 className="mt-2 p-1 flex justify-center text-2xl font-bold">
+                <FaUser className="mt-2 me-2" />
                 Sign up
             </h1>
 
