@@ -1,8 +1,8 @@
-const Input = () => {
+
+const Input = ({type}) => {
     return (
-        <input type="text"
-            className="
-                my-2 border-2 
+        <input type={type}
+            className="my-2 border-2 
                 border-gray-200
                 rounded
                 w-full

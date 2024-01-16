@@ -12,9 +12,9 @@ const RegistPage = () => {
             </h1>
 
             <div>
-                <Input />
-                <Input />
-                <Input />
+                <Input type="text"/>
+                <Input type="text" />
+                <Input type="password" />
             </div>
         </div>
     );
