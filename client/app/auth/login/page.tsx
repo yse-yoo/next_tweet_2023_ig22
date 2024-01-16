@@ -1,10 +1,12 @@
 import Link from "next/link";
 import Input from "@/app/components/Input";
+import { RiLockPasswordFill } from "react-icons/ri";
 
 const LoginPage = () => {
     return (
         <div className="mx-auto w-1/3">
             <h1 className="my-2 p-1 flex justify-center text-2xl font-bold">
+                <RiLockPasswordFill className="mt-2 me-2"/>
                 Sign in
             </h1>
 
