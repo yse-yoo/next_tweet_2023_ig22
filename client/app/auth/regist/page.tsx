@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import Input from "@/app/components/Input";
+import { registUser } from "@/app/services/UserService";
 
 const RegistPage = () => {
     const [name, setName] = useState("");
@@ -12,6 +13,12 @@ const RegistPage = () => {
 
     const regist = async () => {
         console.log(name, email, password)
+        const result = await registUser({name, email, password});
+        if (result.error) {
+
+        } else {
+            // リダイレクト
+        }
     }
 
     return (
