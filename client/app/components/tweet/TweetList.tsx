@@ -6,7 +6,7 @@ import { Tweet } from '@/app/models/Tweet';
 
 interface TweetListProps {
     initialTweets: Tweet[];
-    newTweet?: Tweet;
+    newTweet: Tweet;
 }
 
 const TweetList = ({ initialTweets, newTweet }: TweetListProps) => {

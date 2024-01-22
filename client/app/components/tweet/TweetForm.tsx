@@ -2,7 +2,12 @@ import { User, testUser } from "@/app/models/User";
 import { postTweet } from "@/app/services/TweetService";
 import { useState } from "react";
 
-const TweetForm = ({onPostTweet}) => {
+interface TweetFormProps {
+    onPostTweet: (message: string) => void;
+}
+
+
+const TweetForm = ({onPostTweet}: TweetFormProps) => {
     const [message, setMessage] = useState<string>("")
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const enableButtonClassName = "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg";
