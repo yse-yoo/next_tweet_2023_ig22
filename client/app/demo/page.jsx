@@ -3,8 +3,11 @@
 import React, { useState } from 'react';
 
 export default function CounterPage() {
-  const [count, setCount] = useState(0);
-
+    const [count, setCount] = useState(0);
+    // var count = 0
+    // const setCount = (value) => {
+    //     count = value;
+    // }
   return (
     <div>
       <p className="p-5">You clicked {count} times</p>
