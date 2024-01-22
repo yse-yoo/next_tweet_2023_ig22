@@ -1,5 +1,4 @@
 import { User } from "@/app/models/User";
-import { access } from "fs";
 
 const LARAVEL_API_URL = process.env.NEXT_PUBLIC_LARAVEL_API_URL;
 
