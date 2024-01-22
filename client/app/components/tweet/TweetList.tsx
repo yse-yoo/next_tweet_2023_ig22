@@ -19,7 +19,7 @@ const TweetList = ({ initialTweets, }: TweetListProps) => {
         <div>
             {
                 tweets?.map((tweet) => (
-                    <TweetDetail />
+                    <TweetDetail key={tweet.id} />
                 ))
             }
         </div>
