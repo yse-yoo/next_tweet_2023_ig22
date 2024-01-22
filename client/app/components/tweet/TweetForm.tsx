@@ -3,7 +3,7 @@ import { useState } from "react";
 const TweetForm = () => {
     const [message, setMessage] = useState<string>("")
 
-    function messageHandler(event: React.ChangeEvent<HTMLTextAreaElement>): void {
+    const messageHandler = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
         console.log(event.target.value)
     }
 
