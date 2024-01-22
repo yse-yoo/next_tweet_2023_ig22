@@ -6,7 +6,7 @@ export interface User {
     created_at: string;
     updated_at: string;
     accessToken: string;
-}
+};
 
 export interface PostUser {
     name: string;

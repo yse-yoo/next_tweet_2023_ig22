@@ -1,4 +1,4 @@
-import { User, initialUser } from '@/app/models/User'
+import { User, initialUser } from '@/app/models/User';
 
 export interface Tweet {
     id: number;
@@ -7,7 +7,7 @@ export interface Tweet {
     created_at: string;
     updated_at: string;
     user: User;
-}
+};
 
 export const initialTweet: Tweet = {
     id: 0,
