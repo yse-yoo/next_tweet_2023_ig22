@@ -11,6 +11,11 @@ const TweetForm = () => {
         setIsButtonDisabled(event.target.value.length == 0);
     }
 
+    function onPost(): void {
+        setMessage("");
+        setIsButtonDisabled(true);
+    }
+
     return (
         <div>
             <textarea
@@ -21,6 +26,7 @@ const TweetForm = () => {
                 placeholder="今なにしてる？"></textarea>
             <div className="p-3">{message.length} characters.</div>
             <button
+                onClick={onPost}
                 className={isButtonDisabled ? disableButtonClassName : enableButtonClassName}
                 disabled={isButtonDisabled}>
                 Send</button>
