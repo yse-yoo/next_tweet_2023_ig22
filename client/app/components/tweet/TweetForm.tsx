@@ -8,7 +8,7 @@ const TweetForm = () => {
 
     const messageHandler = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
         setMessage(event.target.value)
-        setIsButtonDisabled((event.target.value) ? false : true);
+        setIsButtonDisabled(event.target.value.length == 0);
     }
 
     return (
