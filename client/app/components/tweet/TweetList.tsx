@@ -6,14 +6,19 @@ import { Tweet } from '@/app/models/Tweet';
 
 interface TweetListProps {
     initialTweets: Tweet[];
+    newTweet?: Tweet;
 }
 
-const TweetList = ({ initialTweets, }: TweetListProps) => {
+const TweetList = ({ initialTweets, newTweet }: TweetListProps) => {
     const [tweets, setTweets] = useState<Tweet[]>(initialTweets);
 
     useEffect(() => {
         setTweets(initialTweets);
     }, [initialTweets]);
+
+    useEffect(() => {
+        setTweets(currentTweets => [newTweet, ...currentTweets]);
+    }, [newTweet]);
 
     return (
         <div>
