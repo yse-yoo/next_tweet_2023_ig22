@@ -21,8 +21,8 @@ const TweetDetail = ({tweet}: TweetDetailProps) => {
             </div>
             <div className="tweet-body">
                 <div className="tweet-user">
-                    <Link href="">
-                        <span className="font-bold"></span>
+                    <Link href="#">
+                        <span className="font-bold">{tweet.user.name}</span>
                     </Link>
                     <span className="ps-3 text-gray-500">{dateFormat(tweet.created_at)}</span>
                 </div>

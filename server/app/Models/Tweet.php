@@ -13,4 +13,10 @@ class Tweet extends Model
         'user_id',
         'message',
     ];
+
+    // 多対1 のリレーション
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
