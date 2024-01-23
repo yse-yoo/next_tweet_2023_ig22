@@ -1,17 +1,24 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import Input from "@/app/components/Input";
 import { registUser } from "@/app/services/UserService";
 import { useRouter } from "next/navigation";
+import FormError from "@/app/components/FormError";
+
+interface registError {
+    name: string;
+    email: string;
+    password: string;
+}
 
 const RegistPage = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState({ name, email, password })
+    const [error, setError] = useState<registError>({ name, email, password })
 
     //ルーター作成
     const router = useRouter();
@@ -30,6 +37,14 @@ const RegistPage = () => {
         }
     }
 
+    useEffect(() => {
+        console.log(name, email, password)
+        if (name && email && password) {
+
+        }
+    }, [name, email, password])
+    
+
     return (
         <div className="mx-auto w-1/3">
             <h1 className="my-2 p-1 flex justify-center text-2xl font-bold">
@@ -43,19 +58,19 @@ const RegistPage = () => {
                     onChange={setName}
                     placeholder="Your Name"
                 />
-                { error.name }
+                <FormError message={error.name} />
                 <Input
                     type="text"
                     onChange={setEmail}
                     placeholder="Email"
                 />
-                { error.email }
+                <FormError message={error.email} />
                 <Input
                     type="password"
                     onChange={setPassword}
                     placeholder="******"
                 />
-                { error.password }
+                <FormError message={error.password} />
             </div>
 
             <div>
