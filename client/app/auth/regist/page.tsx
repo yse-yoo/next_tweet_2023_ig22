@@ -48,7 +48,7 @@ const RegistPage = () => {
     }
 
     useEffect(() => {
-        console.log(name, email, password)
+        // console.log(name, email, password)
         setIsButtonDisabled(!(name && email && password))
     }, [name, email, password])
 
