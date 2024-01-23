@@ -16,10 +16,10 @@ export default function Home() {
     (async () => {
       //APIからTweetデータ取得
       if (user?.accessToken) {
-        const tweets = await getTweets(user.accessToken);
+        const data = await getTweets(user.accessToken);
         console.log("Home:", tweets);
         //データ設定
-        setTweets(tweets);
+        setTweets(data);
       }
     })();
   }, [user])
