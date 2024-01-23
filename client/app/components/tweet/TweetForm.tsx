@@ -10,8 +10,14 @@ interface TweetFormProps {
 const TweetForm = ({onPostTweet}: TweetFormProps) => {
     const [message, setMessage] = useState<string>("")
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-    const enableButtonClassName = "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg";
-    const disableButtonClassName = "bg-blue-200 text-white font-bold py-2 px-4 rounded-lg";
+    const enableButtonClassName = `w-full bg-blue-500 hover:bg-blue-700
+                                   text-white font-bold 
+                                   py-3 px-4 mb-2
+                                   rounded`;
+    const disableButtonClassName = `w-full bg-blue-200
+                                   text-white font-bold 
+                                   py-3 px-4 mb-2
+                                   rounded`;
 
     const messageHandler = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
         setMessage(event.target.value)
