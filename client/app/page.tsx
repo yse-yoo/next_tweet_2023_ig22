@@ -14,8 +14,8 @@ export default function Home() {
 
   useEffect(() => {
     (async () => {
-      //APIからTweetデータ取得
       if (user?.accessToken) {
+        //APIからTweetデータ取得
         const data = await getTweets(user.accessToken);
         console.log("Home:", tweets);
         //データ設定

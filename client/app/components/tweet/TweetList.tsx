@@ -17,7 +17,7 @@ const TweetList = ({ initialTweets, newTweet }: TweetListProps) => {
     }, [initialTweets]);
 
     useEffect(() => {
-        setTweets(currentTweets => [newTweet, ...currentTweets]);
+        (newTweet?.id) && setTweets(currentTweets => [newTweet, ...currentTweets]);
     }, [newTweet]);
 
     return (
