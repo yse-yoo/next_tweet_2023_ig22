@@ -2,22 +2,38 @@
 
 import { useEffect, useState } from "react"
 import { getTweets, postTweet } from "./services/TweetService"
-import { User, testUser } from "./models/User"
+import { User, initialUser, testUser } from "./models/User"
 import { Tweet, initialTweet } from "./models/Tweet"
 import TweetList from "./components/tweet/TweetList"
 import TweetForm from "./components/tweet/TweetForm"
+import { getUser } from "./services/UserService"
+import { getCookie } from "./services/CookieService"
+import { useRouter } from "next/navigation"
 
 export default function Home() {
-  const [user, setUser] = useState<User>(testUser)
+  const router = useRouter();
+
+  // const [user, setUser] = useState<User>(testUser)
+  const [user, setUser] = useState<User>()
   const [tweets, setTweets] = useState<Tweet[]>([])
   const [newTweet, setNewTweet] = useState<Tweet>(initialTweet);
+
+  useEffect(() => {
+    (async () => {
+      const data = await getUser(getCookie('access_token'));
+      if (data?.accessToken) {
+        setUser(data);
+      } else {
+        router.replace('/auth/login')
+      }
+    })();
+  }, [])
 
   useEffect(() => {
     (async () => {
       if (user?.accessToken) {
         //APIからTweetデータ取得
         const data = await getTweets(user.accessToken);
-        console.log("Home:", tweets);
         //データ設定
         setTweets(data);
       }

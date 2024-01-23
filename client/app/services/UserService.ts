@@ -1,4 +1,5 @@
 import { PostUser, User } from "@/app/models/User";
+import { access } from "fs";
 
 const LARAVEL_API_URL = process.env.NEXT_PUBLIC_LARAVEL_API_URL;
 
@@ -36,5 +37,25 @@ export const signIn = async (credentials: Credentials) => {
     })
     if (response.ok) {
         return await response.json();
+    }
+}
+
+// Tweet取得
+export const getUser = async (accessToken: string | null) => {
+    if (!accessToken) return;
+    // Development URL: http://localhost:8000/api/tweet/get
+    const url = LARAVEL_API_URL + "user"
+    // APIサーバにアクセス
+    const response = await fetch(url, {
+        method: "GET",
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+        }
+    });
+    if (response.ok) {
+        const data = await response.json();
+        if (data) data.accessToken = accessToken;
+        return data;
     }
 }
