@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Input from "@/app/components/Input";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { signIn } from "@/app/services/UserService";
 import { useRouter } from "next/navigation";
 import FormError from "@/app/components/FormError";
@@ -15,6 +15,16 @@ const LoginPage = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [error, setError] = useState({ auth: "" })
+
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    const enableButtonClassName = `w-full bg-blue-500 hover:bg-blue-700
+                                   text-white font-bold 
+                                   py-3 px-4 mb-2
+                                   rounded`;
+    const disableButtonClassName = `w-full bg-blue-200
+                                   text-white font-bold 
+                                   py-3 px-4 mb-2
+                                   rounded`;
 
     const auth = async () => {
         console.log(email, password)
@@ -35,6 +45,10 @@ const LoginPage = () => {
             }
         }
     }
+
+    useEffect(() => {
+        setIsButtonDisabled(!(email && password))
+    }, [email, password])
 
     return (
         <div className="mx-auto w-1/3">
@@ -60,13 +74,8 @@ const LoginPage = () => {
             <div>
                 <button
                     onClick={auth}
-                    className="
-                            w-full
-                          bg-blue-500 hover:bg-blue-700
-                          text-white font-bold 
-                          py-3 px-4 mb-2
-                          rounded
-                         ">
+                    className={isButtonDisabled ? disableButtonClassName : enableButtonClassName}
+                    disabled={isButtonDisabled}>
                     Sign in
                 </button>
                 <Link
