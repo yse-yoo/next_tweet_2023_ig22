@@ -11,6 +11,7 @@ const RegistPage = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState({ name, email, password })
 
     //ルーター作成
     const router = useRouter();
@@ -18,9 +19,10 @@ const RegistPage = () => {
     const regist = async () => {
         console.log(name, email, password)
         // APIにデータ送信（ユーザ登録）
-        const result = await registUser({name, email, password});
+        const result = await registUser({ name, email, password });
         if (result.error) {
             console.log(result.error)
+            setError(result.error)
             // エラー表示
         } else {
             // リダイレクト
@@ -41,16 +43,19 @@ const RegistPage = () => {
                     onChange={setName}
                     placeholder="Your Name"
                 />
+                { error.name }
                 <Input
                     type="text"
                     onChange={setEmail}
                     placeholder="Email"
                 />
+                { error.email }
                 <Input
                     type="password"
                     onChange={setPassword}
                     placeholder="******"
                 />
+                { error.password }
             </div>
 
             <div>
