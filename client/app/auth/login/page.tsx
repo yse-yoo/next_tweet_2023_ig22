@@ -4,6 +4,7 @@ import Link from "next/link";
 import Input from "@/app/components/Input";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { useState } from "react";
+import { signIn } from "@/app/services/UserService";
 
 const LoginPage = () => {
     const [email, setEmail] = useState<string>("");
