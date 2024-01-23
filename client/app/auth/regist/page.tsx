@@ -20,6 +20,16 @@ const RegistPage = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState<registError>({ name: "", email: "", password: "" })
 
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    const enableButtonClassName = `w-full bg-blue-500 hover:bg-blue-700
+                                   text-white font-bold 
+                                   py-3 px-4 mb-2
+                                   rounded`;
+    const disableButtonClassName = `w-full bg-blue-200
+                                   text-white font-bold 
+                                   py-3 px-4 mb-2
+                                   rounded`;
+
     //ルーター作成
     const router = useRouter();
 
@@ -39,11 +49,9 @@ const RegistPage = () => {
 
     useEffect(() => {
         console.log(name, email, password)
-        if (name && email && password) {
-
-        }
+        setIsButtonDisabled(!(name && email && password))
     }, [name, email, password])
-    
+
 
     return (
         <div className="mx-auto w-1/3">
@@ -76,13 +84,8 @@ const RegistPage = () => {
             <div>
                 <button
                     onClick={regist}
-                    className="
-                            w-full
-                          bg-blue-500 hover:bg-blue-700
-                          text-white font-bold 
-                          py-3 px-4 mb-2
-                          rounded
-                         ">
+                    className={isButtonDisabled ? disableButtonClassName : enableButtonClassName}
+                    disabled={isButtonDisabled}>
                     Sign up
                 </button>
                 <Link
