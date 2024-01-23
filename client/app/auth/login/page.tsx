@@ -7,6 +7,7 @@ import { useState } from "react";
 import { signIn } from "@/app/services/UserService";
 import { useRouter } from "next/navigation";
 import FormError from "@/app/components/FormError";
+import { setCookie } from "@/app/services/CookieService";
 
 const LoginPage = () => {
     const router = useRouter();
@@ -26,6 +27,9 @@ const LoginPage = () => {
         } else {
             const token = result?.access_token;
             if (token) {
+                // TokenをCookieに保存
+                setCookie('access_token', token, 30);
+
                 //トップページにリダイレクト
                 router.replace('/');
             }
