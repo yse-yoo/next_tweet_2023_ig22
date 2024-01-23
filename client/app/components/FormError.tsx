@@ -1,6 +1,6 @@
 
 interface FormErorProps {
-    message: string;
+    message?: string;
 }
 
 const FormError = ({ message }: FormErorProps) => {

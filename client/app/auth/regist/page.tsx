@@ -18,7 +18,7 @@ const RegistPage = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState<registError>({ name, email, password })
+    const [error, setError] = useState<registError>({ name: "", email: "", password: "" })
 
     //ルーター作成
     const router = useRouter();
