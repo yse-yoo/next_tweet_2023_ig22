@@ -17,6 +17,7 @@ const TweetList = ({ initialTweets, newTweet }: TweetListProps) => {
     }, [initialTweets]);
 
     useEffect(() => {
+        //新しい投稿があれば、投稿データ（Tweetの配列）の最初に追加
         (newTweet?.id) && setTweets(currentTweets => [newTweet, ...currentTweets]);
     }, [newTweet]);
 

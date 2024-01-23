@@ -26,6 +26,7 @@ export default function Home() {
 
   const onPostTweet = async (message: string) => {
     if (user?.accessToken) {
+      // APIにデータ投稿
       const data = await postTweet(user, message)
       data.user = user;
       setNewTweet(data);

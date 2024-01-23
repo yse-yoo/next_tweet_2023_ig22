@@ -4,7 +4,9 @@ const LARAVEL_API_URL = process.env.NEXT_PUBLIC_LARAVEL_API_URL;
 
 // Tweet取得
 export const getTweets = async (accessToken: string) => {
+    // Development URL: http://localhost:8000/api/tweet/get
     const url = LARAVEL_API_URL + "tweet/get"
+    // APIサーバにアクセス
     const response = await fetch(url, {
         method: "GET",
         headers: {
@@ -19,6 +21,7 @@ export const getTweets = async (accessToken: string) => {
 
 // Tweet投稿
 export const postTweet = async (user: User, message: string) => {
+    // Development URL: http://localhost:8000/api/tweet/add
     const url = LARAVEL_API_URL + "tweet/add";
     const user_id = user.id;
     const response = await fetch(url, {

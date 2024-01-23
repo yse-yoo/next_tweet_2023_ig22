@@ -17,6 +17,7 @@ const RegistPage = () => {
 
     const regist = async () => {
         console.log(name, email, password)
+        // APIにデータ送信（ユーザ登録）
         const result = await registUser({name, email, password});
         if (result.error) {
             console.log(result.error)
