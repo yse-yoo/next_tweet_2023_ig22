@@ -1,7 +1,24 @@
 import { PostUser, User } from "@/app/models/User";
-import { access } from "fs";
+import Cookies from "js-cookie";
 
 const LARAVEL_API_URL = process.env.NEXT_PUBLIC_LARAVEL_API_URL;
+
+// Cookieからアクセストークン取得
+export const getAccessToken = () => {
+    return Cookies.get('access_token') || "";
+}
+
+// Cookieにアクセストークンを更新
+export const updateAccessToken = async (token: string) => {
+    if (!token) return;
+    await Cookies.set("access_token", token, { expires: 30 });
+}
+
+// Cookieからアクセストークンを削除
+export const removeAccessToken = async () => {
+    await Cookies.remove("access_token");
+}
+
 
 export const registUser = async (postUser: PostUser) => {
     // Development URL: http://localhost:8000/api/regist/store
