@@ -33,7 +33,7 @@ const Navbar = () => {
 
             <div className="text-sm md:flex-grow">
                 {
-                    (user == undefined || user?.id > 0) ?
+                    (user?.id > 0) ?
                         <>
                             <NavbarLink href="/user/profile" label="Profile" />
                             <NavbarLink href="#" label="Sign out" onClick={signOut} />
