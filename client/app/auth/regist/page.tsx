@@ -7,6 +7,7 @@ import Input from "@/app/components/Input";
 import { registUser } from "@/app/services/UserService";
 import { useRouter } from "next/navigation";
 import FormError from "@/app/components/FormError";
+import Loading from "@/app/components/Loading";
 
 interface registError {
     name: string;
@@ -19,6 +20,7 @@ const RegistPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState<registError>({ name: "", email: "", password: "" })
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const enableButtonClassName = `w-full bg-blue-500 hover:bg-blue-700
@@ -34,6 +36,8 @@ const RegistPage = () => {
     const router = useRouter();
 
     const regist = async () => {
+        setIsLoading(true);
+
         console.log(name, email, password)
         // APIにデータ送信（ユーザ登録）
         const result = await registUser({ name, email, password });
@@ -43,8 +47,9 @@ const RegistPage = () => {
             // エラー表示
         } else {
             // リダイレクト
-            router.replace('/');
+            router.replace('/auth/login');
         }
+        setIsLoading(false);
     }
 
     useEffect(() => {
@@ -81,25 +86,30 @@ const RegistPage = () => {
                 <FormError message={error.password} />
             </div>
 
-            <div>
-                <button
-                    onClick={regist}
-                    className={isButtonDisabled ? disableButtonClassName : enableButtonClassName}
-                    disabled={isButtonDisabled}>
-                    Sign up
-                </button>
-                <Link
-                    href="/auth/login"
-                    className="
+            {
+                isLoading ?
+                    <Loading />
+                    :
+                    <div>
+                        <button
+                            onClick={regist}
+                            className={isButtonDisabled ? disableButtonClassName : enableButtonClassName}
+                            disabled={isButtonDisabled}>
+                            Sign up
+                        </button>
+                        <Link
+                            href="/auth/login"
+                            className="
                             flex justify-center
                           bg-gray-200 hover:bg-gray-300
                           text-gray-500 font-bold 
                           py-3 px-4 
                           rounded
                          ">
-                    Sing in
-                </Link>
-            </div>
+                            Sing in
+                        </Link>
+                    </div>
+            }
         </div>
     );
 }
