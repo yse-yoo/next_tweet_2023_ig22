@@ -2,15 +2,11 @@
 
 import Image from 'next/image';
 import imageMe from '@/public/images/me.png';
-import { useContext, useEffect, useState } from 'react';
-import { getAccessToken, getUser } from '@/app/services/UserService';
-import { useRouter } from 'next/navigation';
-import { User } from '@/app/models/User';
+import { useContext } from 'react';
 import UserContext from '@/app/context/UserContext';
 
 const ProfilePage = () => {
-  const { user, setUser } = useContext(UserContext);
-  // const [user, setUser] = useState<User>()
+  const { user } = useContext(UserContext);
 
   return (
     <div>
