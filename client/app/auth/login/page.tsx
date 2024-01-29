@@ -44,6 +44,7 @@ const LoginPage = () => {
 
             //トップページにリダイレクト
             router.replace('/');
+            return;
         }
         setIsLoading(false);
     }
