@@ -23,6 +23,7 @@ export const removeAccessToken = async () => {
 export const registUser = async (postUser: PostUser) => {
     // Development URL: http://localhost:8000/api/regist/store
     const url = LARAVEL_API_URL + "regist/store";
+    console.log(url)
     // APIにアクセス（ユーザ登録）
     const response = await fetch(url, {
         method: "POST",
