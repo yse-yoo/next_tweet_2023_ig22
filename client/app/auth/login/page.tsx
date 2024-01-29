@@ -8,6 +8,7 @@ import { getUser, signIn, updateAccessToken } from "@/app/services/UserService";
 import { useRouter } from "next/navigation";
 import FormError from "@/app/components/FormError";
 import UserContext from "@/app/context/UserContext";
+import Loading from "@/app/components/Loading";
 
 const LoginPage = () => {
     const { setUser } = useContext(UserContext);
@@ -16,6 +17,7 @@ const LoginPage = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [error, setError] = useState({ auth: "" })
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const enableButtonClassName = `w-full bg-blue-500 hover:bg-blue-700
@@ -28,6 +30,8 @@ const LoginPage = () => {
                                    rounded`;
 
     const auth = async () => {
+        setIsLoading(true);
+
         console.log(email, password)
         // APIにデータ送信
         const result = await signIn({ email, password })
@@ -49,6 +53,7 @@ const LoginPage = () => {
             //トップページにリダイレクト
             router.replace('/');
         }
+        setIsLoading(false);
     }
 
     useEffect(() => {
@@ -76,25 +81,30 @@ const LoginPage = () => {
                 <FormError message={error?.auth} />
             </div>
 
-            <div>
-                <button
-                    onClick={auth}
-                    className={isButtonDisabled ? disableButtonClassName : enableButtonClassName}
-                    disabled={isButtonDisabled}>
-                    Sign in
-                </button>
-                <Link
-                    href="/auth/regist"
-                    className="
+            {
+                isLoading ?
+                    <Loading />
+                    :
+                    <div>
+                        <button
+                            onClick={auth}
+                            className={isButtonDisabled ? disableButtonClassName : enableButtonClassName}
+                            disabled={isButtonDisabled}>
+                            Sign in
+                        </button>
+                        <Link
+                            href="/auth/regist"
+                            className="
                             flex justify-center
                           bg-gray-200 hover:bg-gray-300
                           text-gray-500 font-bold 
                           py-3 px-4 
                           rounded
                          ">
-                    Register
-                </Link>
-            </div>
+                            Register
+                        </Link>
+                    </div>
+            }
         </div>
     );
 }
