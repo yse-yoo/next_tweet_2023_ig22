@@ -10,6 +10,7 @@ import FormError from "@/app/components/FormError";
 import UserContext from "@/app/context/UserContext";
 import Loading from "@/app/components/Loading";
 import ClickButton from "@/app/components/ClickButton";
+import LinkButton from "@/app/components/LinkButton";
 
 const LoginPage = () => {
     const { setUser } = useContext(UserContext);
@@ -81,17 +82,10 @@ const LoginPage = () => {
                             disabled={disabled()}
                         />
 
-                        <Link
+                        <LinkButton
                             href="/auth/regist"
-                            className="
-                            flex justify-center
-                          bg-gray-200 hover:bg-gray-300
-                          text-gray-500 font-bold 
-                          py-3 px-4 
-                          rounded
-                         ">
-                            Register
-                        </Link>
+                            label="Register"
+                        />
                     </div>
             }
         </div>
