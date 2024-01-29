@@ -9,6 +9,7 @@ import TweetForm from "./components/tweet/TweetForm"
 import { useRouter } from "next/navigation"
 import { getAccessToken, getUser } from "@/app/services/UserService"
 import UserContext from "./context/UserContext"
+import Loading from "./components/Loading"
 
 export default function Home() {
   const { user } = useContext(UserContext);
@@ -39,7 +40,7 @@ export default function Home() {
   return (
     <div>
       <TweetForm onPostTweet={onPostTweet} />
-
+      <Loading />
       <TweetList initialTweets={tweets} newTweet={newTweet} />
     </div>
   )
