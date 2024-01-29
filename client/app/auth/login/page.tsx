@@ -42,10 +42,6 @@ const LoginPage = () => {
                 //Cookie にアクセストークンを保存
                 updateAccessToken(token);
 
-                // アクセストークンからユーザ取得
-                const data = await getUser(token);
-                setUser(data);
-
                 //トップページにリダイレクト
                 router.replace('/');
             }
