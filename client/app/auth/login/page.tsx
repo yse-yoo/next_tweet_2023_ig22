@@ -43,7 +43,7 @@ const LoginPage = () => {
             await setUser(user)
 
             //トップページにリダイレクト
-            router.replace('/');
+            router.push('/');
             return;
         }
         setIsLoading(false);

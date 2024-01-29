@@ -39,7 +39,7 @@ const RegistPage = () => {
             // エラー表示
         } else {
             // リダイレクト
-            router.replace('/auth/login');
+            router.push('/auth/login');
         }
         setIsLoading(false);
     }

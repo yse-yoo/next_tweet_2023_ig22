@@ -19,7 +19,7 @@ const Navbar = () => {
         // Cookie削除
         await removeAccessToken();
         // ログインページにリダイレクト
-        router.replace('/auth/login');
+        router.push('/auth/login');
     }
 
     return (
