@@ -19,14 +19,13 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       console.log("Home:", user)
-      if (user?.accessToken) {
-        //APIからTweetデータ取得
-        const data = await getTweets(user.accessToken);
-        //データ設定
-        setTweets(data);
-      }
+      if (!user?.accessToken) return;
+      //APIからTweetデータ取得
+      const data = await getTweets(user.accessToken);
+      //データ設定
+      setTweets(data);
     })();
-  }, [user])
+  }, [])
 
   const onPostTweet = async (message: string) => {
     if (user?.accessToken) {

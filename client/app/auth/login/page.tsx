@@ -10,8 +10,7 @@ import FormError from "@/app/components/FormError";
 import UserContext from "@/app/context/UserContext";
 
 const LoginPage = () => {
-    const { setAccessToken } = useContext(UserContext);
-
+    const { setUser } = useContext(UserContext);
     const router = useRouter();
 
     const [email, setEmail] = useState<string>("");
@@ -42,7 +41,10 @@ const LoginPage = () => {
 
             //Cookie にアクセストークンを保存
             await updateAccessToken(token);
-            setAccessToken(token);
+
+            //ユーザ設定
+            const user = await getUser(token);
+            await setUser(user)
 
             //トップページにリダイレクト
             router.replace('/');

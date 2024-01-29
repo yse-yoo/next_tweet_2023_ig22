@@ -15,7 +15,7 @@ const Navbar = () => {
 
     const signOut = async () => {
         // ユーザ情報削除
-        setUser(initialUser)
+        await setUser(initialUser)
         // Cookie削除
         await removeAccessToken();
         // ログインページにリダイレクト
@@ -33,7 +33,7 @@ const Navbar = () => {
 
             <div className="text-sm md:flex-grow">
                 {
-                    (user?.id > 0) ?
+                    (user == undefined || user?.id > 0) ?
                         <>
                             <NavbarLink href="/user/profile" label="Profile" />
                             <NavbarLink href="#" label="Sign out" onClick={signOut} />
