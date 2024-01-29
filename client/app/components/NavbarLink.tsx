@@ -3,7 +3,7 @@ import Link from 'next/link'
 interface NavbarLinkProps {
     href: string;
     label: string;
-    onClick?: () => void;
+    onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 const className = "hidden mt-1 p-3 md:inline-block text-black";

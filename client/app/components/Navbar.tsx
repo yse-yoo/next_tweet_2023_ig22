@@ -10,15 +10,14 @@ import UserContext from '../context/UserContext';
 import { initialUser } from '../models/User';
 
 const Navbar = () => {
+    const router = useRouter();
     const { user, setUser } = useContext(UserContext);
 
-    const router = useRouter();
     const signOut = async () => {
-        // Cookie削除
-        await removeAccessToken();
         // ユーザ情報削除
         setUser(initialUser)
-
+        // Cookie削除
+        await removeAccessToken();
         // ログインページにリダイレクト
         router.replace('/auth/login');
     }

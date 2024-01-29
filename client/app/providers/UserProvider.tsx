@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import UserContext from "../context/UserContext";
 import { initialUser } from "../models/User";
 import Cookies from "js-cookie";
-import { getUser } from "../services/UserService";
+import { getUser, updateAccessToken } from "../services/UserService";
 
 export default function UserProvider({
     children,
@@ -12,6 +12,7 @@ export default function UserProvider({
     children: React.ReactNode,
 }): React.ReactNode {
     const [user, setUser] = useState(initialUser)
+    const [accessToken, setAccessToken] = useState("")
 
     //トークンからユーザ取得
     useEffect(() => {
@@ -23,8 +24,17 @@ export default function UserProvider({
         })();
     }, [])
 
+    useEffect(() => {
+        (async () => {
+            if (!accessToken) return;
+            const user = await getUser(accessToken);
+            console.log("AuthProvider:", user)
+            setUser(user);
+        })();
+    }, [accessToken])
+
     return (
-        <UserContext.Provider value={{ user, setUser }}>
+        <UserContext.Provider value={{ user, setUser, accessToken, setAccessToken }}>
             {children}
         </UserContext.Provider>
     )

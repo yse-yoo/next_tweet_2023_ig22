@@ -10,7 +10,7 @@ import FormError from "@/app/components/FormError";
 import UserContext from "@/app/context/UserContext";
 
 const LoginPage = () => {
-    const { setUser } = useContext(UserContext);
+    const { setAccessToken } = useContext(UserContext);
 
     const router = useRouter();
 
@@ -38,13 +38,14 @@ const LoginPage = () => {
             console.log(result?.error)
         } else {
             const token = result?.access_token;
-            if (token) {
-                //Cookie にアクセストークンを保存
-                updateAccessToken(token);
+            if (!token) return;
 
-                //トップページにリダイレクト
-                router.replace('/');
-            }
+            //Cookie にアクセストークンを保存
+            await updateAccessToken(token);
+            setAccessToken(token);
+
+            //トップページにリダイレクト
+            router.replace('/');
         }
     }
 
