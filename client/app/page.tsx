@@ -6,9 +6,8 @@ import { User, initialUser, testUser } from "./models/User"
 import { Tweet, initialTweet } from "./models/Tweet"
 import TweetList from "./components/tweet/TweetList"
 import TweetForm from "./components/tweet/TweetForm"
-import { getUser } from "./services/UserService"
-import { getCookie } from "./services/CookieService"
 import { useRouter } from "next/navigation"
+import { getAccessToken, getUser } from "@/app/services/UserService"
 
 export default function Home() {
   const router = useRouter();
@@ -21,7 +20,9 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       // トークンを使って、ユーザを取得
-      const data = await getUser(getCookie('access_token'));
+      const token = getAccessToken();
+      console.log("Access Token:", token)
+      const data = await getUser(token);
       if (data?.accessToken) {
         setUser(data);
       } else {
