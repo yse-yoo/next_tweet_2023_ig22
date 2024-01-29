@@ -12,17 +12,16 @@ export default function UserProvider({
     children: React.ReactNode,
 }): React.ReactNode {
     const [user, setUser] = useState(initialUser)
-    const token = Cookies.get('access_token') || "";
 
     //トークンからユーザ取得
     useEffect(() => {
         (async () => {
-            //const token = await Cookies.get('access_token') || "";
+            const token = await Cookies.get('access_token') || "";
             const user = await getUser(token);
             console.log("AuthProvider:", user)
             setUser(user);
         })();
-    }, [token])
+    }, [])
 
     return (
         <UserContext.Provider value={{user, setUser}}>
