@@ -12,15 +12,7 @@ const Input = ({type, value, onChange, placeholder} : InputProps) => {
             value={value}
             onChange={(e) => { onChange && onChange(e.target.value)}}
             placeholder={placeholder}
-            className="my-2 border-2 
-                border-gray-200
-                rounded
-                w-full
-                p-3
-                focus:outline-none
-                focus:bg-white
-                focus:border-blue-500"
-        />
+            className="my-2 border-2 border-gray-200 rounded w-full p-3 focus:outline-none focus:bg-white focus:border-blue-500" />
     );
 }
 

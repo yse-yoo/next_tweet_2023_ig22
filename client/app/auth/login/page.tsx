@@ -44,6 +44,7 @@ const LoginPage = () => {
 
             //トップページにリダイレクト
             router.push('/');
+            setIsLoading(false);
             return;
         }
         setIsLoading(false);
@@ -58,19 +59,17 @@ const LoginPage = () => {
                 Sign in
             </h1>
 
-            <div>
-                <Input
-                    type="text"
-                    onChange={setEmail}
-                    placeholder="Email"
-                />
-                <Input
-                    type="password"
-                    onChange={setPassword}
-                    placeholder="******"
-                />
-                <FormError message={error?.auth} />
-            </div>
+            <Input
+                type="text"
+                onChange={setEmail}
+                placeholder="Email"
+            />
+            <Input
+                type="password"
+                onChange={setPassword}
+                placeholder="******"
+            />
+            <FormError message={error?.auth} />
 
             {
                 isLoading ?
