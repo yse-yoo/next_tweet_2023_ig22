@@ -1,6 +1,7 @@
 import { User, testUser } from "@/app/models/User";
 import { postTweet } from "@/app/services/TweetService";
 import { useState } from "react";
+import ClickButton from "../ClickButton";
 
 interface TweetFormProps {
     onPostTweet: (message: string) => void;
@@ -9,26 +10,17 @@ interface TweetFormProps {
 
 const TweetForm = ({onPostTweet}: TweetFormProps) => {
     const [message, setMessage] = useState<string>("")
-    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-    const enableButtonClassName = `w-full bg-blue-500 hover:bg-blue-700
-                                   text-white font-bold 
-                                   py-3 px-4 mb-2
-                                   rounded`;
-    const disableButtonClassName = `w-full bg-blue-200
-                                   text-white font-bold 
-                                   py-3 px-4 mb-2
-                                   rounded`;
 
     const messageHandler = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
         setMessage(event.target.value)
-        setIsButtonDisabled(event.target.value.length == 0);
     }
 
     function onPost(): void {
         onPostTweet(message)
         setMessage("");
-        setIsButtonDisabled(true);
     }
+
+    const disabled = () => (message.length == 0)
 
     return (
         <div>
@@ -38,12 +30,14 @@ const TweetForm = ({onPostTweet}: TweetFormProps) => {
                 className="resize-none 
                     w-full h-24 border rounded-md p-2"
                 placeholder="今なにしてる？"></textarea>
+
             <div className="p-3">{message.length} characters.</div>
-            <button
+
+            <ClickButton
                 onClick={onPost}
-                className={isButtonDisabled ? disableButtonClassName : enableButtonClassName}
-                disabled={isButtonDisabled}>
-                Send</button>
+                label="Post"
+                disabled={disabled()}
+                />
         </div>
     );
 }
