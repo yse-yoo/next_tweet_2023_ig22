@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { getTweets, postTweet } from "./services/TweetService"
 import { User, initialUser, testUser } from "./models/User"
 import { Tweet, initialTweet } from "./models/Tweet"
@@ -8,32 +8,21 @@ import TweetList from "./components/tweet/TweetList"
 import TweetForm from "./components/tweet/TweetForm"
 import { useRouter } from "next/navigation"
 import { getAccessToken, getUser } from "@/app/services/UserService"
+import UserContext from "./context/UserContext"
 
 export default function Home() {
   const router = useRouter();
 
   // const [user, setUser] = useState<User>(testUser)
-  const [user, setUser] = useState<User>()
+  // const [user, setUser] = useState<User>()
+  const { user } = useContext(UserContext);
+
   const [tweets, setTweets] = useState<Tweet[]>([])
   const [newTweet, setNewTweet] = useState<Tweet>(initialTweet);
 
   useEffect(() => {
     (async () => {
-      // トークンを使って、ユーザを取得
-      const token = getAccessToken();
-      console.log("Access Token:", token)
-      const data = await getUser(token);
-      if (data?.accessToken) {
-        setUser(data);
-      } else {
-        // ユーザ認証していなければログインページにリダイレクト
-        router.replace('/auth/login')
-      }
-    })();
-  }, [])
-
-  useEffect(() => {
-    (async () => {
+      console.log("Home:", user)
       if (user?.accessToken) {
         //APIからTweetデータ取得
         const data = await getTweets(user.accessToken);
