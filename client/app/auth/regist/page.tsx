@@ -8,6 +8,8 @@ import { registUser } from "@/app/services/UserService";
 import { useRouter } from "next/navigation";
 import FormError from "@/app/components/FormError";
 import Loading from "@/app/components/Loading";
+import ClickButton from "@/app/components/ClickButton";
+import LinkButton from "@/app/components/LinkButton";
 
 interface registError {
     name: string;
@@ -21,16 +23,6 @@ const RegistPage = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState<registError>({ name: "", email: "", password: "" })
     const [isLoading, setIsLoading] = useState<boolean>(false);
-
-    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-    const enableButtonClassName = `w-full bg-blue-500 hover:bg-blue-700
-                                   text-white font-bold 
-                                   py-3 px-4 mb-2
-                                   rounded`;
-    const disableButtonClassName = `w-full bg-blue-200
-                                   text-white font-bold 
-                                   py-3 px-4 mb-2
-                                   rounded`;
 
     //ルーター作成
     const router = useRouter();
@@ -52,11 +44,7 @@ const RegistPage = () => {
         setIsLoading(false);
     }
 
-    useEffect(() => {
-        // console.log(name, email, password)
-        setIsButtonDisabled(!(name && email && password))
-    }, [name, email, password])
-
+    const disabled = () => !(name && email && password)
 
     return (
         <div className="mx-auto w-1/3">
@@ -91,23 +79,16 @@ const RegistPage = () => {
                     <Loading />
                     :
                     <div>
-                        <button
+                         <ClickButton
+                            label="Sign up"
                             onClick={regist}
-                            className={isButtonDisabled ? disableButtonClassName : enableButtonClassName}
-                            disabled={isButtonDisabled}>
-                            Sign up
-                        </button>
-                        <Link
+                            disabled={disabled()}
+                        />
+
+                        <LinkButton
                             href="/auth/login"
-                            className="
-                            flex justify-center
-                          bg-gray-200 hover:bg-gray-300
-                          text-gray-500 font-bold 
-                          py-3 px-4 
-                          rounded
-                         ">
-                            Sing in
-                        </Link>
+                            label="Sign in"
+                        />
                     </div>
             }
         </div>
