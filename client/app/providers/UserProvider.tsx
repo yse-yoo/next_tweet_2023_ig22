@@ -16,7 +16,7 @@ export default function UserProvider({
     //トークンからユーザ取得
     useEffect(() => {
         (async () => {
-            const token = Cookies.get('access_token') || "";
+            const token = await Cookies.get('access_token') || "";
             const user = await getUser(token);
             console.log("AuthProvider:", user)
             setUser(user);

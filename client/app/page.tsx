@@ -11,10 +11,6 @@ import { getAccessToken, getUser } from "@/app/services/UserService"
 import UserContext from "./context/UserContext"
 
 export default function Home() {
-  const router = useRouter();
-
-  // const [user, setUser] = useState<User>(testUser)
-  // const [user, setUser] = useState<User>()
   const { user } = useContext(UserContext);
 
   const [tweets, setTweets] = useState<Tweet[]>([])
