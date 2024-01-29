@@ -3,13 +3,15 @@
 import Link from "next/link";
 import Input from "@/app/components/Input";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { useEffect, useState } from "react";
-import { signIn } from "@/app/services/UserService";
+import { useContext, useEffect, useState } from "react";
+import { getUser, signIn, updateAccessToken } from "@/app/services/UserService";
 import { useRouter } from "next/navigation";
 import FormError from "@/app/components/FormError";
-import { setCookie } from "@/app/services/CookieService";
+import UserContext from "@/app/context/UserContext";
 
 const LoginPage = () => {
+    const { setUser } = useContext(UserContext);
+
     const router = useRouter();
 
     const [email, setEmail] = useState<string>("");
@@ -37,8 +39,12 @@ const LoginPage = () => {
         } else {
             const token = result?.access_token;
             if (token) {
-                // TokenをCookieに保存
-                setCookie('access_token', token, 30);
+                //Cookie にアクセストークンを保存
+                updateAccessToken(token);
+
+                // アクセストークンからユーザ取得
+                const data = await getUser(token);
+                setUser(data);
 
                 //トップページにリダイレクト
                 router.replace('/');
