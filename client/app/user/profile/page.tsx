@@ -12,17 +12,6 @@ const ProfilePage = () => {
   const { user, setUser } = useContext(UserContext);
   // const [user, setUser] = useState<User>()
 
-  const router = useRouter();
-
-  useEffect(() => {
-    (async () => {
-      if (!user?.accessToken) {
-        // ユーザ認証していなければログインページにリダイレクト
-        router.replace('/auth/login')
-      }
-    })();
-  }, [user])
-
   return (
     <div>
       <h1 className="text-3xl text-center font-bold p-3">Profile</h1>
