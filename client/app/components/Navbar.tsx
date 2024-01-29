@@ -3,8 +3,19 @@
 import Link from 'next/link'
 import { SiLoopback } from 'react-icons/si';
 import NavbarLink from './NavbarLink';
+import { removeAccessToken } from '../services/UserService';
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
+    const router = useRouter();
+
+    const signOut = async () => {
+        // Cookie削除
+        await removeAccessToken();
+        // ログインページにリダイレクト
+        router.replace('/auth/login');
+    }
+
     return (
         <nav className="px-5 py-3 flex border-b">
             <div className="flex items-center mr-6">
@@ -17,7 +28,7 @@ const Navbar = () => {
             <div className="text-sm md:flex-grow">
                 <NavbarLink href="/user/profile" label="Profile" />
                 <NavbarLink href="/auth/regist" label="Register" />
-                <NavbarLink href="#" label="Sign out" onClick={() => {alert('Ok')}} />
+                <NavbarLink href="#" label="Sign out" onClick={signOut} />
                 <NavbarLink href="/auth/login" label="Sign in" />
             </div>
         </nav>
