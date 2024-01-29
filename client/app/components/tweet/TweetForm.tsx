@@ -1,12 +1,9 @@
-import { User, testUser } from "@/app/models/User";
-import { postTweet } from "@/app/services/TweetService";
 import { useState } from "react";
 import ClickButton from "../ClickButton";
 
 interface TweetFormProps {
     onPostTweet: (message: string) => void;
 }
-
 
 const TweetForm = ({onPostTweet}: TweetFormProps) => {
     const [message, setMessage] = useState<string>("")
