@@ -1,40 +1,34 @@
-import { useState } from "react";
-import ClickButton from "../ClickButton";
+"use client"
+
+import { useState } from 'react';
+import ClickButton from '../ClickButton';
 
 interface TweetFormProps {
     onPostTweet: (message: string) => void;
 }
 
-const TweetForm = ({onPostTweet}: TweetFormProps) => {
-    const [message, setMessage] = useState<string>("")
+const TweetForm = ({ onPostTweet }: TweetFormProps) => {
+    const [message, setMessage] = useState("");
 
-    const messageHandler = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
-        setMessage(event.target.value)
+    const messageHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setMessage(e.target.value);
     }
 
-    function onPost(): void {
-        onPostTweet(message)
+    const onPost = () => {
+        onPostTweet(message);
         setMessage("");
     }
 
-    const disabled = () => (message.length == 0)
+    const isDisabled = () => !message;
 
     return (
         <div>
             <textarea
                 value={message}
                 onChange={messageHandler}
-                className="resize-none 
-                    w-full h-24 border rounded-md p-2"
+                className="resize-none w-full h-24 border rounded-md p-2"
                 placeholder="今なにしてる？"></textarea>
-
-            <div className="p-3">{message.length} characters.</div>
-
-            <ClickButton
-                onClick={onPost}
-                label="Post"
-                disabled={disabled()}
-                />
+            <ClickButton label="Post" onClick={onPost} disabled={isDisabled()} />
         </div>
     );
 }
