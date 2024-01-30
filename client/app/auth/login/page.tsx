@@ -28,6 +28,11 @@ const LoginPage = () => {
         await signIn("credentials", { email, password })
     }
 
+    const githubAuth = async () => {
+        setIsLoading(true);
+        await signIn("github");
+    }
+
     // Original Sign in
     // const auth = async () => {
     //     setIsLoading(true);
@@ -90,6 +95,10 @@ const LoginPage = () => {
                             disabled={disabled()}
                         />
 
+                        <ClickButton
+                            label="Sign in With GitHub"
+                            onClick={githubAuth}
+                        />
                         <LinkButton
                             href="/auth/regist"
                             label="Register"
