@@ -4,7 +4,8 @@ import Link from "next/link";
 import Input from "@/app/components/Input";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { useContext, useEffect, useState } from "react";
-import { getUser, signIn, updateAccessToken } from "@/app/services/UserService";
+// import { getUser, signIn, updateAccessToken } from "@/app/services/UserService";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import FormError from "@/app/components/FormError";
 import UserContext from "@/app/context/UserContext";
@@ -21,34 +22,41 @@ const LoginPage = () => {
     const [error, setError] = useState({ auth: "" })
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
+    //NextAuth Sign in
     const auth = async () => {
         setIsLoading(true);
-
-        console.log(email, password)
-        // APIにデータ送信
-        const result = await signIn({ email, password })
-        // エラー設定
-        if (!result || result.error) {
-            setError(result?.error || { auth: "Internal Error!" })
-            console.log(result?.error)
-        } else {
-            const token = result?.access_token;
-            if (!token) return;
-
-            //Cookie にアクセストークンを保存
-            await updateAccessToken(token);
-
-            //ユーザ設定
-            const user = await getUser(token);
-            await setUser(user)
-
-            //トップページにリダイレクト
-            router.push('/');
-            setIsLoading(false);
-            return;
-        }
-        setIsLoading(false);
+        await signIn("credentials", { email, password })
     }
+
+    // Original Sign in
+    // const auth = async () => {
+    //     setIsLoading(true);
+
+    //     console.log(email, password)
+    //     // APIにデータ送信
+    //     const result = await signIn({ email, password })
+    //     // エラー設定
+    //     if (!result || result.error) {
+    //         setError(result?.error || { auth: "Internal Error!" })
+    //         console.log(result?.error)
+    //     } else {
+    //         const token = result?.access_token;
+    //         if (!token) return;
+
+    //         //Cookie にアクセストークンを保存
+    //         await updateAccessToken(token);
+
+    //         //ユーザ設定
+    //         const user = await getUser(token);
+    //         await setUser(user)
+
+    //         //トップページにリダイレクト
+    //         router.push('/');
+    //         setIsLoading(false);
+    //         return;
+    //     }
+    //     setIsLoading(false);
+    // }
 
     const disabled = () => !(email && password)
 
