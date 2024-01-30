@@ -1,7 +1,7 @@
 export { default } from "next-auth/middleware";
 
 export const config = {
-matcher: ["/", "/user/:path*", "/user/:slug*"]
+    matcher: ["/", "/user/:path*", "/user/:slug*"]
 };
 
 // import { NextRequest, NextResponse } from 'next/server';
