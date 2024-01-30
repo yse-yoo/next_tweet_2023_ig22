@@ -1,6 +1,7 @@
 // "use client"
 
 import { PostUser } from '@/app/models/User';
+import { SNSAccount } from '@/app/models/User';
 
 interface Credentials {
     email: string;
@@ -55,5 +56,28 @@ export const signIn = async (credentials: Credentials) => {
     if (response.ok) {
         const result = await response.json();
         return result;
+    }
+}
+
+export const signInForSNS = async (account: SNSAccount) => {
+    console.log("SNS signIn:", account)
+
+    const url = LARAVEL_API_URL + "auth/" + account.provider;
+    console.log(url);
+    console.log("SNS signIn:", account)
+
+    //TODO: Validate
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', },
+            body: JSON.stringify({ account }),
+        });
+        if (response.ok) {
+            const result = await response.json();
+            return result;
+        }
+    } catch (error) {
+        return error;
     }
 }

@@ -6,8 +6,9 @@ import GoogleProvider from "next-auth/providers/google";
 import AppleProvider from "next-auth/providers/apple";
 import FacebookProvider from "next-auth/providers/facebook";
 
-import { signIn, getUser } from '@/app/services/UserService';
+import { signIn, getUser, signInForSNS } from '@/app/services/UserService';
 import { Session } from "next-auth";
+import { SNSAccount } from '@/app/models/User';
 
 export const authOptions: NextAuthOptions = {
     debug: false,
@@ -50,7 +51,17 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         async signIn({ user, account, profile, email, credentials }) {
             console.log('--- signIn ---')
-            console.log(user)
+            console.log(user, account, profile, email, credentials)
+            if (user && account) {
+                const authUser:SNSAccount = {
+                    name: user.name || "",
+                    email: user.email || "",
+                    provider: account.provider || "",
+                    providerAccountId: account.providerAccountId || "",
+                    accessToken: account.access_token || "",
+                };
+                await signInForSNS(authUser)
+            }
             return true;
         },
         async redirect({ url, baseUrl }) {

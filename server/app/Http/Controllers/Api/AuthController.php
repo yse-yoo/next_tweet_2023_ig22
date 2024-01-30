@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -23,6 +25,25 @@ class AuthController extends Controller
             return response()->json($data);
         } catch (Exception $e) {
             return response()->json(['error' => ['auth' => 'Server error']], 500);
+        }
+    }
+
+    public function authForSNS(Request $request, string $provider)
+    {
+        //TODO: Provider
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make(Str::random(10)),
+            ]);
+        }
+        if ($user) {
+            $user->access_token = $user->createToken('auth_token', ['*'], now()->addWeek())->plainTextToken;
+            return response()->json(['user' => $user]);
+        } else {
+            return response()->json(['error' => ['message' => 'invalid regist']]);
         }
     }
 }

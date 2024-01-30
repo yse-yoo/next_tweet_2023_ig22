@@ -17,6 +17,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // AuthController
 Route::post('/auth', [AuthController::class, 'auth']);
+Route::post('/auth/{provider}', [AuthController::class, 'authForSNS']);
 
 // RegistController
 Route::post('/regist/store', [RegistUserController::class, 'store']);

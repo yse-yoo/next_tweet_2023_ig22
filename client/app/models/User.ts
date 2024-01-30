@@ -8,6 +8,14 @@ export interface User {
     accessToken: string;
 };
 
+export interface SNSAccount {
+    name: string;
+    email: string;
+    provider: string;
+    providerAccountId: string;
+    accessToken: string;
+}
+
 export interface PostUser {
     name: string;
     email: string;
