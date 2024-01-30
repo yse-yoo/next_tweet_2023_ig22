@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation';
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
@@ -36,10 +37,9 @@ export const authOptions: NextAuthOptions = {
 
                 const email = credentials?.email || "";
                 const password = credentials?.password || "";
-                // ユーザ認証
                 const result = await signIn({ email, password });
+
                 if (result?.access_token) {
-                    //トークンからユーザ取得
                     const user = getUser(result?.access_token);
                     return user;
                 }
@@ -49,20 +49,18 @@ export const authOptions: NextAuthOptions = {
     ],
     callbacks: {
         async signIn({ user, account, profile, email, credentials }) {
-            console.log("singIn:", user)
+            console.log('--- signIn ---')
+            console.log(user)
             return true;
         },
         async redirect({ url, baseUrl }) {
-            console.log("redirect:", baseUrl)
             return baseUrl
         },
         async jwt({ token, user }) {
-            console.log("jwt:", token)
             return { ...token, ...user }
         },
         async session({ session, token }) {
             session.user = token as Session["user"];
-            console.log("session:", session)
             return session;
         },
     }

@@ -1,51 +1,45 @@
 "use client"
 
-import { useContext, useEffect, useState } from "react"
-import { getTweets, postTweet } from "./services/TweetService"
-import { Tweet, initialTweet } from "./models/Tweet"
-import TweetList from "./components/tweet/TweetList"
-import TweetForm from "./components/tweet/TweetForm"
-import UserContext from "./context/UserContext"
-import Loading from "./components/Loading"
+import { useEffect, useState, useContext, } from 'react';
+import { Tweet } from '@/app/models/Tweet';
+import TweetList from '@/app/components/tweet/TweetList';
+import TweetForm from '@/app/components/tweet/TweetForm';
+
+import { getTweets, postTweet } from '@/app/services/TweetService';
+import UserContext from './context/UserContext';
+import Loading from './components/Loading';
+import { User, testUser } from './models/User';
+import { useSession } from 'next-auth/react';
 
 export default function Home() {
-  const { user } = useContext(UserContext);
+  // const { user, setUser } = useContext(UserContext);
+  // const [user, setUser] = useState<User>(testUser);
+  const { data: session } = useSession();
+  const user: User = session?.user as User;
 
-  const [tweets, setTweets] = useState<Tweet[]>([])
-  const [newTweet, setNewTweet] = useState<Tweet>(initialTweet);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [tweets, setTweets] = useState<Tweet[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
-      setIsLoading(true);
-      console.log("Home:", user)
       if (!user?.accessToken) return;
-      //APIからTweetデータ取得
-      const data = await getTweets(user.accessToken);
-      //データ設定
+      setIsLoading(true)
+      const data = await getTweets(user?.accessToken);
       setTweets(data);
-      setIsLoading(false);
+      setIsLoading(false)
     })();
-  }, [user])
+  }, [user]);
 
   const onPostTweet = async (message: string) => {
-    if (user?.accessToken) {
-      // APIにデータ投稿
-      const data = await postTweet(user, message)
-      data.user = user;
-      setNewTweet(data);
-    }
+    const newTweet = await postTweet(user, message);
+    newTweet?.id && setTweets(currentTweets => [newTweet, ...currentTweets]);
   }
 
   return (
     <div>
       <TweetForm onPostTweet={onPostTweet} />
-
       {
-        isLoading ?  
-        <Loading />
-        :
-        <TweetList initialTweets={tweets} newTweet={newTweet} />
+        (isLoading) ? <Loading /> : <TweetList tweets={tweets} />
       }
     </div>
   )

@@ -1,25 +1,14 @@
-export const setCookie = (name: string, value: string, daysToExpire: number): void => {
-    const expireDate = new Date();
-    expireDate.setDate(expireDate.getDate() + daysToExpire);
-    const cookieValue = encodeURIComponent(name) + "="
-        + encodeURIComponent(value)
-        + "; expires="
-        + expireDate.toUTCString()
-        + "; path=/";
-    document.cookie = cookieValue;
+import Cookies from 'js-cookie';
+
+export const getAccessToken = () => {
+    return Cookies.get('access_token') || "";
 }
 
-export const getCookie = (name: string): string | null => {
-    const cookies = document.cookie.split(';');
-    for (const cookie of cookies) {
-        const trimmedCookie = cookie.trim();
-        if (trimmedCookie.indexOf(name + "=") === 0) {
-            return decodeURIComponent(trimmedCookie.substring(name.length + 1));
-        }
-    }
-    return null;
+export const updateAccessToken = async (token: string) => {
+    if (!token) return;
+    await Cookies.set("access_token", token, { expires: 30 });
 }
 
-export const deleteCookie = (name: string): void => {
-    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+export const removeAccessToken = async () => {
+    await Cookies.remove("access_token");
 }
