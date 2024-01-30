@@ -1,3 +1,7 @@
+// export { default } from "next-auth/middleware"
+
+// export const config = { matcher: ["/"] }
+
 import { NextRequest, NextResponse } from 'next/server';
 
 const authURL = process.env.BASE_URL + "auth/login";
