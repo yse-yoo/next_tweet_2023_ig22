@@ -1,4 +1,3 @@
-import { redirect } from 'next/navigation';
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
@@ -37,9 +36,10 @@ export const authOptions: NextAuthOptions = {
 
                 const email = credentials?.email || "";
                 const password = credentials?.password || "";
+                // ユーザ認証
                 const result = await signIn({ email, password });
-
                 if (result?.access_token) {
+                    //トークンからユーザ取得
                     const user = getUser(result?.access_token);
                     return user;
                 }
