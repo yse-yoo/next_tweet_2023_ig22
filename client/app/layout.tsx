@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Navbar from '@/app/components/Navbar'
-import UserProvider from '@/app/providers/UserProvider'
+// import UserProvider from '@/app/providers/UserProvider'
+import { NextAuthProvider } from '@/app/providers/NextAuthProvider'
 
 export const metadata: Metadata = {
   title: 'Next Tweet',
@@ -13,16 +14,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  // JSX
   return (
     <html lang="ja">
       <body className='flex min-h-screen flex-col p-2'>
-        <UserProvider>
+        <NextAuthProvider>
           <Navbar />
           <main className="m-10">
             {children}
           </main>
-        </UserProvider>
+        </NextAuthProvider>
       </body>
     </html>
   )
