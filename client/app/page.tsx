@@ -32,6 +32,7 @@ export default function Home() {
 
   const onPostTweet = async (message: string) => {
     const newTweet = await postTweet(user, message);
+    newTweet.user = user;
     newTweet?.id && setTweets(currentTweets => [newTweet, ...currentTweets]);
   }
 
